@@ -1,21 +1,25 @@
 import { ethers } from "hardhat";
 
+// Types
+import { BBKIsERC20 } from "../typechain-types";
+import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
+
+// Whitelisted addresses
+import { whitelisted } from "../utils/whitelisted";
+
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  
+  let contract: BBKIsERC20;
+  let merkleTree: StandardMerkleTree<string[]>
+  merkleTree = StandardMerkleTree.of(whitelisted, ["address"], { sortLeaves: true });
 
-  const lockedAmount = ethers.parseEther("0.001");
+  const [owner] = await ethers.getSigners();
+  contract = await ethers.deployContract("BBKIsERC20", [owner.address, merkleTree.root]);
 
-  const lock = await ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
-
-  await lock.waitForDeployment();
+  await contract.waitForDeployment();
 
   console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
+    `BBKIsERC20 deployed to ${contract.target} with merkleRoot ${merkleTree.root}`
   );
 }
 

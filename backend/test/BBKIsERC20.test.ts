@@ -8,7 +8,6 @@ import { ethers } from "hardhat";
 // Types
 import { BBKIsERC20 } from "../typechain-types";
 import type { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
-import { NonPayableOverrides } from "../typechain-types/common";
 import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 
 // Whitelisted addresses
