@@ -106,7 +106,6 @@ describe("BBKIsERC20 Tests", function () {
 
       let contractMerkleRoot = await contract.merkleRoot()
       assert(newMerkleRoot === contractMerkleRoot);
-
     })
   })
 });
