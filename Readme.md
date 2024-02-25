@@ -1,4 +1,4 @@
-# BBKIsERC20
+# ERC20 Airdop with Merkle Trees | Hardhat | Wagmi V2 | Viem V2 | RainbowKit V2 | Typescript | NextJS | ChakraUI 
 
 This project implements a standard ERC20 token with an additional whitelisting feature based on a Merkle tree for initial token distribution.
 
